@@ -90,9 +90,10 @@ class CosBucket:
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/'
         self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,   dir_name + '/')
         response, content = self.http.request(uri=self.url, method='POST', body='{"op": "delete"}', headers=self.headers)
-        print(response)
-        print(content)
-        pass
+        if eval(content.decode('utf8')).get('code') == 0:
+            return True
+        else:
+            return False
 
 
 class CosAuth(object):
