@@ -37,19 +37,60 @@ class CosBucket:
 
     """创建目录"""
     def create_folder(self, dir_name):
-        self.url = "<Region>.file.myqcloud.com" + "/files/v2/<appid>/<bucket_name>/<dir_name>/"
-        self.url = process_url(self.url, self.config)
-        self.url = str(self.url).replace("<bucket_name>", self.config.bucket).replace("<dir_name>",dir_name)
-        self.url = 'http://' + self.url
+        self.url = "http://<Region>.file.myqcloud.com" + "/files/v2/<appid>/<bucket_name>/<dir_name>/"
+        self.url = self.url.replace("<Region>", self.config.region).replace("<appid>", str(self.config.app_id))
+        self.url = str(self.url).replace("<bucket_name>", self.config.bucket).replace("<dir_name>", dir_name)
         self.headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30 )
-        response,content = self.http.request(uri=self.url, method='POST', body='{"op": "create", "biz_attr": ""}', headers=self.headers)
-        print(response)
-        print(content)
-"""处理url"""
-def process_url(url, config):
-    url = str(url)
-    url = url.replace("<Region>",config.region).replace("<appid>", str(config.app_id))
-    return url
+        response, content = self.http.request(uri=self.url, method='POST', body='{"op": "create", "biz_attr": ""}', headers=self.headers)
+        if eval(content.decode('utf8')).get("code") == 0:
+            return True
+        else:
+            return False
+
+
+    def list_folder(self, dir_name=None, prefix=None, num=1000, context=None):
+        """列目录(https://www.qcloud.com/document/product/436/6062)
+
+        :param dir_name:文件夹名称
+        :param prefix:前缀
+        :param num:查询的文件的数量，最大支持1000，默认查询数量为1000
+        :param context:翻页标志，将上次查询结果的context的字段传入，即可实现翻页的功能
+        :return 查询结果，为json格式
+        """
+        self.url = 'http://<Region>.file.myqcloud.com/files/v2/<appid>/<bucket_name>/'
+        self.url = self.url.replace("<Region>", self.config.region).replace("<appid>", str(self.config.app_id)).replace("<bucket_name>", self.config.bucket)
+        if dir_name is not None:
+            self.url = self.url + str(dir_name) + "/"
+        if prefix is not None:
+            self.url = self.url + str(prefix)
+        self.url = self.url + "?op=list&num=" + str(num)
+        if context is not None:
+            self.url = self.url + '&context=' + str(context)
+        self.headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
+        response, content = self.http.request(uri=self.url, method='GET', headers=self.headers)
+        return content.decode("utf8")
+
+    def query_folder(self, dir_name):
+        """查询目录属性(https://www.qcloud.com/document/product/436/6063)
+
+        :param dir_name:查询的目录的名称
+        :return:查询出来的结果，为json格式
+        """
+        self.url = 'http://' + self.config.region + '.file.myqcloud.com' + '/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/?op=stat'
+        self.headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
+        reponse, content = self.http.request(uri=self.url, method='GET',headers=self.headers)
+        return content.decode("utf8")
+
+    def delete_folder(self, dir_name):
+        """删除目录
+
+        :param dir_name:删除的目录的目录名
+        :return: 删除结果，成功返回True，失败返回False
+        """
+        self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/'
+        self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket, '/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/')
+
+        pass
 
 
 class CosAuth(object):
