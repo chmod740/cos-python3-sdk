@@ -88,8 +88,10 @@ class CosBucket:
         :return: 删除结果，成功返回True，失败返回False
         """
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/'
-        self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket, '/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/')
-
+        self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,   dir_name + '/')
+        response, content = self.http.request(uri=self.url, method='POST', body='{"op": "delete"}', headers=self.headers)
+        print(response)
+        print(content)
         pass
 
 
@@ -105,7 +107,7 @@ class CosAuth(object):
         rdm = random.randint(0, 999999999)
         cos_path = urllib.parse.quote(cos_path.encode('utf8'), '~/')
         if upload_sign:
-            fileid = '/%s/%s%s' % (appid, bucket, cos_path)
+            fileid = '/%s/%s/%s' % (appid, bucket, cos_path)
         else:
             fileid = cos_path
 
