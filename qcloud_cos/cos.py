@@ -6,8 +6,8 @@ import hmac
 import hashlib
 import binascii
 import base64
-
-
+import requests
+from .file_tool import get_file_sha1
 
 class Cos:
     def __init__(self, app_id, secret_id, secket_key, region="shanghai"):
@@ -28,15 +28,25 @@ class CosConfig:
     bucket = ''
 class CosBucket:
 
-    """初始化操作"""
+
     def __init__(self, cos_config, bucket_name):
+        """初始化操作
+
+        """
+
         self.config = cos_config
         self.config.bucket = bucket_name
         self.http = Http()
         self.headers = {'Content-Type': 'application/json'}
 
-    """创建目录"""
+
     def create_folder(self, dir_name):
+        """创建目录(https://www.qcloud.com/document/product/436/6061)
+
+        :param dir_name:要创建的目录的目录的名称
+        :return 返回True创建成功，返回False创建失败
+        """
+
         self.url = "http://<Region>.file.myqcloud.com" + "/files/v2/<appid>/<bucket_name>/<dir_name>/"
         self.url = self.url.replace("<Region>", self.config.region).replace("<appid>", str(self.config.app_id))
         self.url = str(self.url).replace("<bucket_name>", self.config.bucket).replace("<dir_name>", dir_name)
@@ -95,6 +105,19 @@ class CosBucket:
         else:
             return False
 
+    def upload_file(self,real_file_path, file_name, dir_name=None):
+        self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket
+        if dir_name is not None:
+            self.url = + '/' + dir_name
+        self.url = self.url + '/' + file_name
+        headers = {}
+        headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
+        files = {'file': ('', open(real_file_path, 'rb'))}
+        print(self.url)
+        r = requests.post(url=self.url, data={'op': 'upload', 'sha': str(get_file_sha1(real_file_path)), 'biz_attr': '', 'insertOnly': '0'}, files={'filecontent': (real_file_path, open(real_file_path, 'rb'), 'application/octet-stream')},  headers=headers)
+        print(r.status_code)
+        print(r.content)
+        pass
 
 class CosAuth(object):
     def __init__(self, config):
