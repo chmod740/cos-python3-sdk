@@ -7,7 +7,6 @@ import hashlib
 import binascii
 import base64
 import requests
-from .file_tool import get_file_sha1
 
 class Cos:
     def __init__(self, app_id, secret_id, secket_key, region="shanghai"):
@@ -105,7 +104,7 @@ class CosBucket:
         else:
             return False
 
-    def upload_file(self,real_file_path, file_name, dir_name=None):
+    def upload_file(self, real_file_path, file_name, dir_name=None):
         """简单上传文件(https://www.qcloud.com/document/product/436/6066)
 
         :param real_file_path: 文件的物理地址
@@ -121,7 +120,7 @@ class CosBucket:
         headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
         files = {'file': ('', open(real_file_path, 'rb'))}
         print(self.url)
-        r = requests.post(url=self.url, data={'op': 'upload', 'sha': str(get_file_sha1(real_file_path)), 'biz_attr': '', 'insertOnly': '0'}, files={'filecontent': (real_file_path, open(real_file_path, 'rb'), 'application/octet-stream')},  headers=headers)
+        r = requests.post(url=self.url, data={'op': 'upload', 'biz_attr': '', 'insertOnly': '0'}, files={'filecontent': (real_file_path, open(real_file_path, 'rb'), 'application/octet-stream')},  headers=headers)
         return str(eval(r.content.decode('utf8')).get('data'))
 
 
