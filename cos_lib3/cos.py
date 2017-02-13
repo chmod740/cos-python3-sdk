@@ -45,7 +45,8 @@ class CosBucket:
         :param dir_name:要创建的目录的目录的名称
         :return 返回True创建成功，返回False创建失败
         """
-
+        if dir_name[0] == '/':
+            dir_name = dir_name[1:len(dir_name)]
         self.url = "http://<Region>.file.myqcloud.com" + "/files/v2/<appid>/<bucket_name>/<dir_name>/"
         self.url = self.url.replace("<Region>", self.config.region).replace("<appid>", str(self.config.app_id))
         self.url = str(self.url).replace("<bucket_name>", self.config.bucket).replace("<dir_name>", dir_name)
@@ -66,6 +67,8 @@ class CosBucket:
         :param context:翻页标志，将上次查询结果的context的字段传入，即可实现翻页的功能
         :return 查询结果，为json格式
         """
+        if dir_name[0] == '/':
+            dir_name = dir_name[1:len(dir_name)]
         self.url = 'http://<Region>.file.myqcloud.com/files/v2/<appid>/<bucket_name>/'
         self.url = self.url.replace("<Region>", self.config.region).replace("<appid>", str(self.config.app_id)).replace("<bucket_name>", self.config.bucket)
         if dir_name is not None:
@@ -85,6 +88,8 @@ class CosBucket:
         :param dir_name:查询的目录的名称
         :return:查询出来的结果，为json格式
         """
+        if dir_name[0] == '/':
+            dir_name = dir_name[1:len(dir_name)]
         self.url = 'http://' + self.config.region + '.file.myqcloud.com' + '/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/?op=stat'
         self.headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
         reponse, content = self.http.request(uri=self.url, method='GET',headers=self.headers)
@@ -96,6 +101,8 @@ class CosBucket:
         :param dir_name:删除的目录的目录名
         :return: 删除结果，成功返回True，失败返回False
         """
+        if dir_name[0] == '/':
+            dir_name = dir_name[1:len(dir_name)]
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket + '/' + dir_name + '/'
         self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,   dir_name + '/')
         response, content = self.http.request(uri=self.url, method='POST', body='{"op": "delete"}', headers=self.headers)
@@ -112,6 +119,8 @@ class CosBucket:
         :param dir_name: 文件夹名称（可选）
         :return:json数据串
         """
+        if dir_name[0] == '/':
+            dir_name = dir_name[1:len(dir_name)]
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket
         if dir_name is not None:
             self.url = + '/' + dir_name
@@ -119,10 +128,40 @@ class CosBucket:
         headers = {}
         headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
         files = {'file': ('', open(real_file_path, 'rb'))}
-        print(self.url)
-        r = requests.post(url=self.url, data={'op': 'upload', 'biz_attr': '', 'insertOnly': '0'}, files={'filecontent': (real_file_path, open(real_file_path, 'rb'), 'application/octet-stream')},  headers=headers)
+        r = requests.post(url=self.url, data={'op': 'upload', 'biz_attr': '', 'insertOnly': '0'}, files={},  headers=headers)
         return str(eval(r.content.decode('utf8')).get('data'))
 
+    def move_file(self, source_fileid, dest_fileid):
+        """"""
+        source_fileid = source_fileid.replace("\\", '/')
+        dest_fileid = dest_fileid.replace("\\", "/")
+        if source_fileid[0] == '/':
+            source_fileid = source_fileid[1:len(source_fileid)]
+        self.url = "http://" + self.config.region + ".file.myqcloud.com/files/v2/" + str(self.config.app_id) + "/" + self.config.bucket + "/" + source_fileid
+        headers = {}
+        headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,  source_fileid)
+        r = requests.post(url=self.url, data={'op': 'move', 'dest_fileid': dest_fileid, 'to_over_write': '0'}, files={'filecontent': ('','', 'application/octet-stream')},  headers=headers)
+        code = eval(r.content.decode('utf8')).get('code')
+        if code == 0:
+            return True
+        else:
+            return False
+
+    def copy_file(self, source_fileid, dest_fileid):
+        """"""
+        source_fileid = source_fileid.replace("\\", '/')
+        dest_fileid = dest_fileid.replace("\\", "/")
+        if source_fileid[0] == '/':
+            source_fileid = source_fileid[1:len(source_fileid)]
+        self.url = "http://" + self.config.region + ".file.myqcloud.com/files/v2/" + str(self.config.app_id) + "/" + self.config.bucket + "/" + source_fileid
+        headers = {}
+        headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,  source_fileid)
+        r = requests.post(url=self.url, data={'op': 'copy', 'dest_fileid': dest_fileid, 'to_over_write': '0'}, files={'filecontent': ('','', 'application/octet-stream')},  headers=headers)
+        code = eval(r.content.decode('utf8')).get('code')
+        if code == 0:
+            return True
+        else:
+            return False
 
 class CosAuth(object):
     def __init__(self, config):
