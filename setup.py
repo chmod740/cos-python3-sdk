@@ -16,7 +16,7 @@ setup(
     url='https://github.com/imu-hupeng/cos-python3-sdk',
     packages=['cos_lib3'],
     include_package_data=True,
-    install_requires = ['requests>=2.0','httplib2>=0.9'],
+    install_requires=['requests>=2.0','httplib2>=0.9'],
     license='MIT License',
     zip_safe=False,
 )
