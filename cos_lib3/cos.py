@@ -163,6 +163,22 @@ class CosBucket:
         else:
             return False
 
+    def delete_file(self, dest_fileid):
+        """
+        """
+        dest_fileid = dest_fileid.replace("\\", "/")
+        if dest_fileid[0] == '/':
+            dest_fileid = dest_fileid[1:len(dest_fileid)]
+        self.url = "http://" + self.config.region + ".file.myqcloud.com/files/v2/" + str(
+            self.config.app_id) + "/" + self.config.bucket + "/" + dest_fileid
+        self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,  dest_fileid)
+        response, content = self.http.request(uri=self.url, method='POST', body='{"op": "delete"}',
+                                              headers=self.headers)
+        if response.get('status') == 200:
+            return True
+        else:
+            return False
+
 class CosAuth(object):
     def __init__(self, config):
         self.config = config
