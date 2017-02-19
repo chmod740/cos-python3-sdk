@@ -28,29 +28,11 @@ bucket = cos.get_bucket("test")
 ```python
 bucket.create_folder('<目录名称>')
 ```
-样例调用：
-```python
-rst = bucket.create_folder('abc')
-print(rst)
-```
-样例输出：
-```json
-True
-```
 #### 3.2 查询目录属性
 格式如下：
 ```python
 bucket.query_folder('<目录名称>')
-```
-样例调用：
-```python
-rst = bucket.query_folder('abc')
-print(rst)
-```
-样例输出:
-```json
-{"code":0,"message":"SUCCESS","request_id":"NTg5ZjE0NzJfNTViMjM1X2ZjMF8xYTFlZmE=","data":{"biz_attr":"","ctime":1486816738,"mtime":1486816738}}
-```
+
 #### 3.3 列出目录
 调用格式1：
 ```python
@@ -90,8 +72,18 @@ bucket.upload_file(real_file_path='<文件的在本地的路径>', file_name='<�
 #### 4.2 文件分片上传
 暂未实现
 #### 4.3 文件移动
-即将实现
+调用格式
+```python
+bucket.move_file(source_fileid='<源文件的路径>', dest_fileid='目标文件的路径')
+```
 #### 4.4 文件复制
-即将实现
+调用格式
+```python
+bucket.copy_file(source_fileid='<源文件路径>', dest_fileid='目标文件路径')
+```
 #### 4.5 文件删除
-即将实现
+调用格式
+```python
+bucket.delete_file('<文件的绝对路径>')
+```
+

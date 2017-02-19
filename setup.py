@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name='cos_lib3',
-    version='0.0.2',
+    version='0.0.3',
     description='an unofficial sdk for qcloud cos',
     author='hupeng',
     author_email='hupeng@imudges.com',
