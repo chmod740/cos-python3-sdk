@@ -11,7 +11,7 @@ import requests
 class Cos:
     def __init__(self, app_id, secret_id, secket_key, region="shanghai"):
         self.config = CosConfig()
-        self.config.app_id = app_id
+        self.config.app_id = int(app_id)
         self.config.secret_id = secret_id
         self.config.secret_key = secket_key
         self.config.region = region
