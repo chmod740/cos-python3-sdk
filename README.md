@@ -2,6 +2,7 @@
 # 腾讯云对象存储服务（cos）Python3.5版本SDK
 ### *此版本非官方版本
 ##### 项目进展：部分开发完成
+##### 项目地址：https://github.com/imu-hupeng/cos-python3-sdk
 ## SDK用法简介
 ### 1.安装
 #### 1.1 推荐使用pip安装，命令： pip install cos-lib3
