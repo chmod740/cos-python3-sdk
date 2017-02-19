@@ -174,7 +174,8 @@ class CosBucket:
         self.headers['Authorization'] = CosAuth(self.config).sign_once(self.config.bucket,  dest_fileid)
         response, content = self.http.request(uri=self.url, method='POST', body='{"op": "delete"}',
                                               headers=self.headers)
-        if response.get('status') == 200:
+        code = eval(content.decode('utf8')).get('code')
+        if code == 0:
             return True
         else:
             return False
