@@ -128,7 +128,8 @@ class CosBucket:
         headers = {}
         headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
         files = {'file': ('', open(real_file_path, 'rb'))}
-        r = requests.post(url=self.url, data={'op': 'upload', 'biz_attr': '', 'insertOnly': '0'}, files={},  headers=headers)
+        r = requests.post(url=self.url, data={'op': 'upload', 'biz_attr': '', 'insertOnly': '0'}, files={
+            'filecontent': (real_file_path, open(real_file_path, 'rb'), 'application/octet-stream')}, headers=headers)
         return str(eval(r.content.decode('utf8')).get('data'))
 
     def move_file(self, source_fileid, dest_fileid):
