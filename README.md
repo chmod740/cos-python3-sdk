@@ -87,4 +87,12 @@ bucket.copy_file(source_fileid='<源文件路径>', dest_fileid='目标文件路
 ```python
 bucket.delete_file('<文件的绝对路径>')
 ```
+#### 4.6 通过url上传文件
+调用格式如下:
+```python
+bucket.upload_file_from_url("http://sucai.qqjay.com/qqjayxiaowo/201210/26/1.jpg", file_name="777.jpg", dir_name=None)
+```
+第一个参数为文件的url地址,
+第二个参数为放在云存储上的显示的文件的文件名,
+第三个参数为文件在云存储上的文件路径,可以为None,此时放在根目录上
 

@@ -7,6 +7,7 @@ import hashlib
 import binascii
 import base64
 import requests
+import os
 
 class Cos:
     def __init__(self, app_id, secret_id, secket_key, region="shanghai"):
@@ -119,13 +120,14 @@ class CosBucket:
         :param dir_name: 文件夹名称（可选）
         :return:json数据串
         """
-        if dir_name is None:
-            dir_name = "/"
-        if dir_name[0] == '/':
+
+        if dir_name is not None and dir_name[0] == '/':
             dir_name = dir_name[1:len(dir_name)]
+        if dir_name is None:
+            dir_name = ""
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket
         if dir_name is not None:
-            self.url = + '/' + dir_name
+            self.url = self.url + '/' + dir_name
         self.url = self.url + '/' + file_name
         headers = {}
         headers['Authorization'] = CosAuth(self.config).sign_more(self.config.bucket, '', 30)
@@ -182,6 +184,21 @@ class CosBucket:
             return True
         else:
             return False
+
+    def upload_file_from_url(self, url, file_name, dir_name=None):
+        """简单上传文件(https://www.qcloud.com/document/product/436/6066)
+
+        :param url: 文件url地址
+        :param file_name: 文件名称
+        :param dir_name: 文件夹名称（可选）
+        :return:json数据串
+        """
+        real_file_name = str(int(time.time()*1000))
+        urllib.request.urlretrieve(url, real_file_name)
+        data = self.upload_file(real_file_name, file_name, dir_name)
+        os.remove(real_file_name)
+        return data
+
 
 class CosAuth(object):
     def __init__(self, config):
