@@ -96,3 +96,15 @@ bucket.upload_file_from_url("http://sucai.qqjay.com/qqjayxiaowo/201210/26/1.jpg"
 第二个参数为放在云存储上的显示的文件的文件名,<br>
 第三个参数为文件在云存储上的文件目录,可以为None,此时放在根目录上
 
+### 5.附录
+#### 5.1 上传文件后我该怎么获取用于访问的链接?
+首先获取上传之后的返回值 如:data = bucket.upload_file(real_file_path='<文件的在本地的路径>', file_name='<文件在bucket的名称>') <br>
+得到的data 的值形如:<br>
+{'source_url': 'http://test-125255866665.costj.myqcloud.com/777.jpg', 'access_url': 'http://test-125255866665.file.myqcloud.com/777.jpg', 'url': 'http://tj.file.myqcloud.com/files/v2/125255866665/test/777.jpg', 'vid': '8fea559ee6578acf89698bef7ae5b6551494676054', 'resource_path': '/125255866665/test/777.jpg'}<br>
+下面我们来解析这个data字符串,得到access_url字段的值并输出:
+```python
+access_url = eval(data).get("access_url")
+print(access_url)
+```
+
+
