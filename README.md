@@ -92,7 +92,7 @@ bucket.delete_file('<文件的绝对路径>')
 ```python
 bucket.upload_file_from_url("http://sucai.qqjay.com/qqjayxiaowo/201210/26/1.jpg", file_name="777.jpg", dir_name=None)
 ```
-第一个参数为文件的url地址,
-第二个参数为放在云存储上的显示的文件的文件名,
+第一个参数为文件的url地址,<br>
+第二个参数为放在云存储上的显示的文件的文件名,<br>
 第三个参数为文件在云存储上的文件目录,可以为None,此时放在根目录上
 
