@@ -33,7 +33,7 @@ bucket.create_folder('<目录名称>')
 格式如下：
 ```python
 bucket.query_folder('<目录名称>')
-
+```
 #### 3.3 列出目录
 调用格式1：
 ```python
