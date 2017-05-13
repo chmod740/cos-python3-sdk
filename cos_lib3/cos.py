@@ -119,6 +119,8 @@ class CosBucket:
         :param dir_name: 文件夹名称（可选）
         :return:json数据串
         """
+        if dir_name is None:
+            dir_name = "/"
         if dir_name[0] == '/':
             dir_name = dir_name[1:len(dir_name)]
         self.url = 'http://' + self.config.region + '.file.myqcloud.com/files/v2/' + str(self.config.app_id) + '/' + self.config.bucket
