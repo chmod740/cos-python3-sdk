@@ -4,7 +4,7 @@
 ##### 项目进展：部分开发完成
 ##### 项目地址：https://github.com/imu-hupeng/cos-python3-sdk
 ## SDK用法简介
-### 1.安装
+### 1.安装(下面两种方式任选其一即可)
 #### 1.1 推荐使用pip安装，命令： pip install cos-lib3
 #### 1.2 下载源码，使用setup.py安装
 ### 2.bucket操作
