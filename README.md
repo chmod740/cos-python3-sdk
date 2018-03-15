@@ -106,5 +106,17 @@ bucket.upload_file_from_url("http://sucai.qqjay.com/qqjayxiaowo/201210/26/1.jpg"
 access_url = eval(data).get("access_url")
 print(access_url)
 ```
+#### 5.2 如果我需要https形式的链接怎么办？
+腾讯云的对象存储服务完全是支持https的，如果你获取到的链接并不是https形式的，尝试使用replace函数把‘http://’ 直接替换成 ‘https://’ 试试
 
+#### 5.3 分片上传现在是无法使用吗？
+感谢开源社区的热心成员，他们提供了分片上传的代码，现在已经集成进去了此sdk，由于本人忙于其他的项目,未能做详尽的测试,分片上传的方法名为 
+```
+upload_slice_file()
+```
+如果这个方法没办法满足您的需求，请尝试
+https://github.com/a270443177/cos-python3-sdk-v4
+这个类库的使用方法完全同于腾讯云对象存储的py2.7版本的SDK
 
+#### 5.4 您发现了bug,或者有什么其他的需求和建议
+请报告issue
