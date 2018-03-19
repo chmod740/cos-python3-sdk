@@ -10,11 +10,11 @@ import requests
 import os
 
 class Cos:
-    def __init__(self, app_id, secret_id, secket_key, region="shanghai"):
+    def __init__(self, app_id, secret_id, secret_key, region="shanghai"):
         self.config = CosConfig()
         self.config.app_id = int(app_id)
         self.config.secret_id = secret_id
-        self.config.secret_key = secket_key
+        self.config.secret_key = secret_key
         self.config.region = region
 
     def get_bucket(self, bucket_name):
