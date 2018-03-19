@@ -14,13 +14,13 @@
 ```python
 from cos_lib3.cos import Cos
 
-cos = Cos(app_id=<appid>, secret_id='<secret_id>', secket_key='<secket_key>', region='<地域：sh（华东），gz（华南），tj（华北）>')
+cos = Cos(app_id=<appid>, secret_id='<secret_id>', secret_key='<secret_key>', region='<地域：sh（华东），gz（华南），tj（华北）>')
 bucket = cos.get_bucket("<bucket名称>")
 ```
 样例调用：
 ```python
 from cos_lib3.cos import Cos
-cos = Cos(app_id=123456789, secret_id='AKIDpTgPyrRUh6cS77PTGVtHZKklTBCurQq2', secket_key='2o5eXbkgNxJ2jWnZ67z1vlIVDxfAQ', region='tj')
+cos = Cos(app_id=123456789, secret_id='AKIDpTgPyrRUh6cS77PTGVtHZKklTBCurQq2', secret_key='2o5eXbkgNxJ2jWnZ67z1vlIVDxfAQ', region='tj')
 bucket = cos.get_bucket("test")
 ```
 
