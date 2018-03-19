@@ -128,3 +128,6 @@ https://github.com/a270443177/cos-python3-sdk-v4
 [fushall1104](https://github.com/fushall1104)：帮助修复命名上的一处bug<br>
 [a270443177](https://github.com/a270443177)：提供分片上传的代码
 </b>
+
+### 7.授权协议
+本项目遵循Apache协议,完全开源,文档齐全,永远免费(商用也是)
