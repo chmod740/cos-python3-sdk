@@ -78,6 +78,7 @@ bucket.upload_slice_file(real_file_path='<文件的在本地的路径>',slice_si
 样例调用
 ```python
 real_file_path = (r'C:\Users\ZhangPeng\Desktop\01.zip')
+# slice_size为分片大小，单位为Byte,有效值：1048576（1MB），如非必要，请勿修改！！
 slice_size = 1048576
 file_name = '01.zip'
 bucket.upload_slice_file(real_file_path, slice_size, file_name)
