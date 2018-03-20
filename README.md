@@ -72,7 +72,16 @@ bucket.upload_file(real_file_path='<文件的在本地的路径>', file_name='<�
 bucket.upload_file(real_file_path='<文件的在本地的路径>', file_name='<文件在bucket的名称>', dir_name='<目录名称>')
 ```
 #### 4.2 文件分片上传
-暂未实现
+```python
+bucket.upload_slice_file(real_file_path='<文件的在本地的路径>',slice_size=1048576,file_name='<文件在bucket的名称>')
+```
+样例调用
+```python
+real_file_path = (r'C:\Users\ZhangPeng\Desktop\01.zip')
+slice_size = 1048576
+file_name = '01.zip'
+bucket.upload_slice_file(real_file_path, slice_size, file_name)
+```
 #### 4.3 文件移动
 调用格式
 ```python
