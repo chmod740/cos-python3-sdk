@@ -121,6 +121,7 @@ print(access_url)
 #### 5.2 如果我需要https形式的链接怎么办？
 腾讯云的对象存储服务完全是支持https的，如果你获取到的链接并不是https形式的，尝试使用replace函数把‘http://’ 直接替换成 ‘https://’ 试试
 
+<del>
 #### 5.3 分片上传现在是无法使用吗？
 感谢开源社区的热心成员，他们提供了分片上传的代码，现在已经集成进去了此sdk，由于本人忙于其他的项目,未能做详尽的测试,分片上传的方法名为 
 ```
@@ -129,6 +130,7 @@ upload_slice_file()
 如果这个方法没办法满足您的需求，请尝试
 https://github.com/a270443177/cos-python3-sdk-v4
 这个类库的使用方法完全同于腾讯云对象存储的py2.7版本的SDK
+</del>
 
 #### 5.4 您发现了bug,或者有什么其他的需求和建议
 请报告issue
@@ -138,6 +140,7 @@ https://github.com/a270443177/cos-python3-sdk-v4
 <b>
 [fushall1104](https://github.com/fushall1104)：帮助修复命名上的一处bug<br>
 [a270443177](https://github.com/a270443177)：提供分片上传的代码
+[zhangpengpengpeng](https://github.com/zhangpengpengpeng)：帮助测试分片上传功能
 </b>
 
 ### 7.授权协议
