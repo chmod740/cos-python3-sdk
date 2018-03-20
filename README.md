@@ -139,7 +139,7 @@ https://github.com/a270443177/cos-python3-sdk-v4
 在本项目的发展过程中得到了来自开源社区的很多成员的宝贵意见以及无私帮助，为这个项目发展做出的极大的贡献，<br>特别是以下用户：<br>
 <b>
 [fushall1104](https://github.com/fushall1104)：帮助修复命名上的一处bug<br>
-[a270443177](https://github.com/a270443177)：提供分片上传的代码
+[a270443177](https://github.com/a270443177)：提供分片上传的代码<br>
 [zhangpengpengpeng](https://github.com/zhangpengpengpeng)：帮助测试分片上传功能
 </b>
 
