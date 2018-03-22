@@ -1,3 +1,4 @@
+![](https://img.shields.io/badge/version-0.2.0-brightgreen.svg)
 # cos-python3-sdk
 # 腾讯云对象存储服务（cos）Python3.5版本SDK
 ### *此版本非官方版本
