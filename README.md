@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/version-0.2.0-brightgreen.svg) 
-![](https://img.shields.io/hexpm/l/plug.svg)
+![](https://img.shields.io/badge/License-Apache%202-yellow.svg)
+![](https://img.shields.io/badge/python-3.4%2C3.5%2C3.6%2C3.7-blue.svg)
 # cos-python3-sdk
 # 腾讯云对象存储服务（cos）Python3.5版本SDK
 ### *此版本非官方版本
