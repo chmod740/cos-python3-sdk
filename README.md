@@ -144,12 +144,19 @@ https://github.com/a270443177/cos-python3-sdk-v4
 #### 5.4 您发现了bug,或者有什么其他的需求和建议
 请报告issue
 
+#### 5.5 出现 You do not have permission to get URL '*' from this server.
+初始化 cos时:
+正确填写region参数,在 COS 控制台 => bucket列表 => 基础配置=>所属地区	
+如 北京 （bj）, region='bj'
+
+
 ### 6.致谢（排名不分先后）
 在本项目的发展过程中得到了来自开源社区的很多成员的宝贵意见以及无私帮助，为这个项目发展做出的极大的贡献，<br>特别是以下用户：<br>
 <b>
 [fushall1104](https://github.com/fushall1104)：帮助修复命名上的一处bug<br>
 [a270443177](https://github.com/a270443177)：提供分片上传的代码<br>
 [zhangpengpengpeng](https://github.com/zhangpengpengpeng)：帮助测试分片上传功能
+[xfdywy](https://github.com/xfdywy)：提出一个可能遇到的问题
 </b>
 
 ### 7.授权协议
