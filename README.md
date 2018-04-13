@@ -148,7 +148,19 @@ https://github.com/a270443177/cos-python3-sdk-v4
 初始化 cos时:<br>
 正确填写region参数,在 COS 控制台 => bucket列表 => 基础配置=>所属地区	<br>
 如 北京 （bj）, region='bj'<br>
+以下表格摘自[官网文档](https://cloud.tencent.com/document/product/436/7777)于（2018-04-13）
 
+| 地域  | 地域简称 | 默认下载域名 | 上传域名 |
+| ------------- | ------------- | ------------- | ------------- | 
+| 北京一区（华北） |	tj | 	<bucketname-APPID>.costj.myqcloud.com  |	tj.file.myqcloud.com |
+| 北京 |	bj |	<bucketname-APPID>.cosbj.myqcloud.com |	bj.file.myqcloud.com |
+| 上海（华东） |	sh |	<bucketname-APPID>.cossh.myqcloud.com |	sh.file.myqcloud.com |
+| 广州（华南）| 	gz |	<bucketname-APPID>.cosgz.myqcloud.com |	gz.file.myqcloud.com |
+| 成都（西南） |	cd |	<bucketname-APPID>.coscd.myqcloud.com |	cd.file.myqcloud.com |
+| 新加坡 |	sgp |	<bucketname-APPID>.cossgp.myqcloud.com |	sgp.file.myqcloud.com |
+| 香港 |	hk |	<bucketname-APPID>.coshk.myqcloud.com |	hk.file.myqcloud.com |
+| 多伦多 |	ca |	<bucketname-APPID>.cosca.myqcloud.com |	ca.file.myqcloud.com |
+| 法兰克福 |	ger |	<bucketname-APPID>.cosger.myqcloud.com |	ger.file.myqcloud.com |
 
 ### 6.致谢（排名不分先后）
 在本项目的发展过程中得到了来自开源社区的很多成员的宝贵意见以及无私帮助，为这个项目发展做出的极大的贡献，<br>特别是以下用户：<br>
