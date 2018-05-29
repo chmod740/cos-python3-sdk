@@ -162,6 +162,9 @@ https://github.com/a270443177/cos-python3-sdk-v4
 | 多伦多 |	ca |	&lt;bucketname-APPID&gt;.cosca.myqcloud.com |	ca.file.myqcloud.com |
 | 法兰克福 |	ger |	&lt;bucketname-APPID&gt;.cosger.myqcloud.com |	ger.file.myqcloud.com |
 
+#### 5.6 upload_file 返回值为None
+如果代码配置没有错误，检查下电脑的时间是不是对的
+
 ### 6.致谢（排名不分先后）
 在本项目的发展过程中得到了来自开源社区的很多成员的宝贵意见以及无私帮助，为这个项目发展做出的极大的贡献，<br>特别是以下用户：<br>
 <b>
